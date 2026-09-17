@@ -8,3 +8,11 @@ createRoot(document.getElementById("root")!).render(
     <App />
   </StrictMode>
 );
+
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("/sw.js").catch(() => {
+      // ثبت service worker با خطا مواجه شد؛ اپ همچنان به‌صورت عادی (بدون قابلیت آفلاین/نصب) کار می‌کنه
+    });
+  });
+}
