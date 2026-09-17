@@ -1,0 +1,10 @@
+.wrapper {
+  display: flex;
+  justify-content: center;
+  padding: var(--space-6) 0;
+}
+
+.text {
+  font-size: 15px;
+  color: var(--color-text-muted);
+}

@@ -1,0 +1,83 @@
+:root {
+  color-scheme: light dark;
+
+  --font-fa: "Vazirmatn", "Tahoma", sans-serif;
+  --font-en: "Segoe UI", Arial, sans-serif;
+
+  --color-brand: #1db954;
+  --color-brand-hover: #17a34a;
+
+  --color-bg: #ffffff;
+  --color-bg-elevated: #f7f8f9;
+  --color-text: #1a1c1e;
+  --color-text-muted: #6b7280;
+  --color-border: #e2e4e8;
+  --color-danger: #dc2626;
+
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-bg: #121417;
+    --color-bg-elevated: #1c1f23;
+    --color-text: #f2f3f5;
+    --color-text-muted: #9aa0a8;
+    --color-border: #2c2f34;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-fa);
+  direction: rtl;
+}
+
+body {
+  min-height: 100vh;
+}
+
+/* برای محتوای انگلیسی داخل کانتینر فارسی (کلمه، IPA، مثال) */
+.ltr-content {
+  direction: ltr;
+  unicode-bidi: isolate;
+  font-family: var(--font-en);
+  display: inline-block;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+input {
+  font-family: inherit;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
