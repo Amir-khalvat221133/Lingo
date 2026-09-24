@@ -18,6 +18,7 @@ export interface WordResult {
   antonyms?: string[];
   wordForms?: WordForm[];
   example?: string;
+  exampleFa?: string;
   commonPhrases?: string[];
   collocations?: string[];
   idioms?: string[];

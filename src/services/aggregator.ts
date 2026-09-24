@@ -1,6 +1,6 @@
 import { fetchDictionary } from "./providers/dictionaryProvider";
 import { fetchSynonyms, fetchAntonyms, fetchSpellingSuggestions } from "./providers/synonymProvider";
-import { translateToFa } from "./providers/translationProvider";
+import { translateWord, translateSentence } from "./providers/translationProvider";
 import { confidenceFromDistance } from "../lib/levenshtein";
 import { getCached, setCached } from "../lib/cache";
 import type { WordResult, SentenceResult } from "../types/word";
@@ -32,11 +32,20 @@ export async function getWordResult(
     return null;
   }
 
-  const [synonyms, antonyms, meaningFa] = await Promise.all([
+  const [synonyms, antonyms] = await Promise.all([
     dict.synonyms.length ? Promise.resolve(dict.synonyms) : fetchSynonyms(word, signal),
     dict.antonyms.length ? Promise.resolve(dict.antonyms) : fetchAntonyms(word, signal),
-    translateToFa(word, signal),
   ]);
+
+  // ترجمه بعد از dict انجام می‌شه چون به pos/معنی/مثال انگلیسی نیاز داره
+  // تا معنی درست رو با توجه به sense انتخاب کنه (مثلاً bank = ساحل رودخانه، نه بانک)
+  const { meaningFa, exampleFa } = await translateWord(
+    word,
+    dict.partOfSpeech,
+    dict.meaningEn,
+    dict.example,
+    signal
+  );
 
   const result: WordResult = {
     word: dict.word,
@@ -48,6 +57,7 @@ export async function getWordResult(
     synonyms,
     antonyms,
     example: dict.example,
+    exampleFa: exampleFa ?? undefined,
     wordForms: dict.wordForms,
   };
 
@@ -76,7 +86,7 @@ export async function getSentenceResult(
   const cached = getCached<SentenceResult>(cacheKey);
   if (cached) return cached;
 
-  const translation = await translateToFa(trimmed, signal);
+  const translation = await translateSentence(trimmed, signal);
   if (!translation) return null;
 
   const result: SentenceResult = { original: trimmed, translation };
