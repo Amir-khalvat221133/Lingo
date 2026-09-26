@@ -19,7 +19,7 @@ import styles from "./App.module.css";
 export default function App() {
   const [query, setQuery] = useState("");
   const [override, setOverride] = useState<SearchOverride | undefined>(undefined);
-  const [recent, setRecent] = useState<RecentSearch[]>(getRecentSearches());
+  const [recent, setRecent] = useState<RecentSearch[]>(getRecentSearches);
 
   const state = useSearch(query, override);
 
