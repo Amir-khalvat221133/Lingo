@@ -28,11 +28,11 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --color-bg: #121417;
-    --color-bg-elevated: #1c1f23;
+    --color-bg: #0a0a0a;
+    --color-bg-elevated: #161616;
     --color-text: #f2f3f5;
     --color-text-muted: #9aa0a8;
-    --color-border: #2c2f34;
+    --color-border: #2a2a2a;
   }
 }
 

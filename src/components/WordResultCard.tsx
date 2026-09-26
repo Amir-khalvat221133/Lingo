@@ -48,161 +48,165 @@ export function WordResultCard({ data, onAcceptSuggestion }: WordResultCardProps
 
   return (
     <>
-      <div className={styles.card}>
+      <div className={styles.wrapper}>
         {data.didYouMean && data.didYouMean.confidence >= 0.7 && onAcceptSuggestion && (
-        <div className={styles.suggestion}>
-          منظورت{" "}
-          <button
-            type="button"
-            className={styles.suggestionBtn}
-            onClick={() => onAcceptSuggestion(data.didYouMean!.suggestion)}
-          >
-            <span className="ltr-content">{data.didYouMean.suggestion}</span>
-          </button>{" "}
-          بود؟
-        </div>
-      )}
-
-      <div className={styles.header}>
-        <span className={`${styles.word} ltr-content`}>{data.word}</span>
-        <button type="button" className={styles.copyBtn} aria-label="کپی کلمه" onClick={handleCopy}>
-          <CopyIcon />
-        </button>
-      </div>
-
-      {data.ipa && (
-        <div className={styles.section}>
-          <div className={styles.sectionTitle}>تلفظ</div>
-          <div className={styles.ipaRow}>
-            <span className={`${styles.sectionText} ltr-content`}>{data.ipa}</span>
-            {data.audioUrl && (
-              <button
-                type="button"
-                className={styles.playBtn}
-                aria-label="پخش تلفظ"
-                onClick={handlePlay}
-              >
-                <PlayIcon />
-              </button>
-            )}
+          <div className={styles.suggestion}>
+            منظورت{" "}
+            <button
+              type="button"
+              className={styles.suggestionBtn}
+              onClick={() => onAcceptSuggestion(data.didYouMean!.suggestion)}
+            >
+              <span className="ltr-content">{data.didYouMean.suggestion}</span>
+            </button>{" "}
+            بود؟
           </div>
-        </div>
-      )}
+        )}
 
-      {data.partOfSpeech && (
-        <div className={styles.section}>
-          <div className={styles.sectionTitle}>نقش دستوری</div>
-          <div className={`${styles.sectionText} ltr-content`}>{data.partOfSpeech}</div>
-        </div>
-      )}
-
-      {data.meaningFa && (
-        <div className={styles.section}>
-          <div className={styles.sectionTitle}>معنی</div>
-          <div className={styles.sectionText}>{data.meaningFa}</div>
-        </div>
-      )}
-
-      {data.meaningEn && (
-        <div className={styles.section}>
-          <div className={styles.sectionTitle}>معنی انگلیسی</div>
-          <div className={`${styles.sectionText} ltr-content`}>{data.meaningEn}</div>
-        </div>
-      )}
-
-      {data.synonyms && data.synonyms.length > 0 && (
-        <div className={styles.section}>
-          <div className={styles.sectionTitle}>مترادف‌ها</div>
-          <div className={styles.chipRow}>
-            {data.synonyms.map((s) => (
-              <span key={s} className={`${styles.chip} ltr-content`}>
-                {s}
-              </span>
-            ))}
+        {/* کارت اصلی: کلمه + تلفظ */}
+        <div className={styles.card}>
+          <div className={styles.header}>
+            <span className={`${styles.word} ltr-content`}>{data.word}</span>
+            <button
+              type="button"
+              className={styles.copyBtn}
+              aria-label="کپی کلمه"
+              onClick={handleCopy}
+            >
+              <CopyIcon />
+            </button>
           </div>
-        </div>
-      )}
 
-      {data.usageDifference && (
-        <div className={styles.section}>
-          <div className={styles.sectionTitle}>تفاوت کاربرد</div>
-          <div className={styles.sectionText}>{data.usageDifference}</div>
+          {data.ipa && (
+            <div className={styles.ipaRow}>
+              <span className={`${styles.sectionText} ltr-content`}>{data.ipa}</span>
+              {data.audioUrl && (
+                <button
+                  type="button"
+                  className={styles.playBtn}
+                  aria-label="پخش تلفظ"
+                  onClick={handlePlay}
+                >
+                  <PlayIcon />
+                </button>
+              )}
+            </div>
+          )}
         </div>
-      )}
 
-      {data.antonyms && data.antonyms.length > 0 && (
-        <div className={styles.section}>
-          <div className={styles.sectionTitle}>متضادها</div>
-          <div className={styles.chipRow}>
-            {data.antonyms.map((a) => (
-              <span key={a} className={`${styles.chip} ltr-content`}>
-                {a}
-              </span>
-            ))}
+        {data.partOfSpeech && (
+          <div className={styles.card}>
+            <div className={styles.sectionTitle}>نقش دستوری</div>
+            <div className={`${styles.sectionText} ltr-content`}>{data.partOfSpeech}</div>
           </div>
-        </div>
-      )}
+        )}
 
-      {data.wordForms && data.wordForms.length > 0 && (
-        <div className={styles.section}>
-          <div className={styles.sectionTitle}>شکل‌های کلمه</div>
-          <div className={styles.chipRow}>
-            {data.wordForms.map((wf) => (
-              <div key={wf.form + wf.label} className={styles.wordFormRow}>
-                <span className={`${styles.chip} ltr-content`}>{wf.form}</span>
-                {wf.label && <span className={styles.wordFormLabel}>{wf.label}</span>}
-              </div>
-            ))}
+        {data.meaningFa && (
+          <div className={styles.card}>
+            <div className={styles.sectionTitle}>معنی</div>
+            <div className={styles.sectionText}>{data.meaningFa}</div>
           </div>
-        </div>
-      )}
+        )}
 
-      {data.example && (
-        <div className={styles.section}>
-          <div className={styles.sectionTitle}>مثال</div>
-          <div className={`${styles.sectionText} ltr-content`}>{data.example}</div>
-        </div>
-      )}
-
-      {data.commonPhrases && data.commonPhrases.length > 0 && (
-        <div className={styles.section}>
-          <div className={styles.sectionTitle}>عبارت‌های رایج</div>
-          <div className={styles.chipRow}>
-            {data.commonPhrases.map((p) => (
-              <span key={p} className={`${styles.chip} ltr-content`}>
-                {p}
-              </span>
-            ))}
+        {data.meaningEn && (
+          <div className={styles.card}>
+            <div className={styles.sectionTitle}>معنی انگلیسی</div>
+            <div className={`${styles.sectionText} ltr-content`}>{data.meaningEn}</div>
           </div>
-        </div>
-      )}
+        )}
 
-      {data.collocations && data.collocations.length > 0 && (
-        <div className={styles.section}>
-          <div className={styles.sectionTitle}>ترکیب‌های رایج</div>
-          <div className={styles.chipRow}>
-            {data.collocations.map((c) => (
-              <span key={c} className={`${styles.chip} ltr-content`}>
-                {c}
-              </span>
-            ))}
+        {data.synonyms && data.synonyms.length > 0 && (
+          <div className={styles.card}>
+            <div className={styles.sectionTitle}>مترادف‌ها</div>
+            <div className={styles.chipRow}>
+              {data.synonyms.map((s) => (
+                <span key={s} className={`${styles.chip} ltr-content`}>
+                  {s}
+                </span>
+              ))}
+            </div>
           </div>
-        </div>
-      )}
+        )}
 
-      {data.idioms && data.idioms.length > 0 && (
-        <div className={styles.section}>
-          <div className={styles.sectionTitle}>اصطلاحات</div>
-          <div className={styles.chipRow}>
-            {data.idioms.map((i) => (
-              <span key={i} className={`${styles.chip} ltr-content`}>
-                {i}
-              </span>
-            ))}
+        {data.usageDifference && (
+          <div className={styles.card}>
+            <div className={styles.sectionTitle}>تفاوت کاربرد</div>
+            <div className={styles.sectionText}>{data.usageDifference}</div>
           </div>
-        </div>
-      )}
+        )}
 
+        {data.antonyms && data.antonyms.length > 0 && (
+          <div className={styles.card}>
+            <div className={styles.sectionTitle}>متضادها</div>
+            <div className={styles.chipRow}>
+              {data.antonyms.map((a) => (
+                <span key={a} className={`${styles.chip} ltr-content`}>
+                  {a}
+                </span>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {data.wordForms && data.wordForms.length > 0 && (
+          <div className={styles.card}>
+            <div className={styles.sectionTitle}>شکل‌های کلمه</div>
+            <div className={styles.chipRow}>
+              {data.wordForms.map((wf) => (
+                <div key={wf.form + wf.label} className={styles.wordFormRow}>
+                  <span className={`${styles.chip} ltr-content`}>{wf.form}</span>
+                  {wf.label && <span className={styles.wordFormLabel}>{wf.label}</span>}
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {data.example && (
+          <div className={styles.card}>
+            <div className={styles.sectionTitle}>مثال</div>
+            <div className={`${styles.sectionText} ltr-content`}>{data.example}</div>
+          </div>
+        )}
+
+        {data.commonPhrases && data.commonPhrases.length > 0 && (
+          <div className={styles.card}>
+            <div className={styles.sectionTitle}>عبارت‌های رایج</div>
+            <div className={styles.chipRow}>
+              {data.commonPhrases.map((p) => (
+                <span key={p} className={`${styles.chip} ltr-content`}>
+                  {p}
+                </span>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {data.collocations && data.collocations.length > 0 && (
+          <div className={styles.card}>
+            <div className={styles.sectionTitle}>ترکیب‌های رایج</div>
+            <div className={styles.chipRow}>
+              {data.collocations.map((c) => (
+                <span key={c} className={`${styles.chip} ltr-content`}>
+                  {c}
+                </span>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {data.idioms && data.idioms.length > 0 && (
+          <div className={styles.card}>
+            <div className={styles.sectionTitle}>اصطلاحات</div>
+            <div className={styles.chipRow}>
+              {data.idioms.map((i) => (
+                <span key={i} className={`${styles.chip} ltr-content`}>
+                  {i}
+                </span>
+              ))}
+            </div>
+          </div>
+        )}
       </div>
       {toast && <div className={styles.toast}>کپی شد</div>}
     </>

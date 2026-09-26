@@ -1,9 +1,14 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
 .card {
   background-color: var(--color-bg-elevated);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
   padding: var(--space-5);
-  margin-bottom: var(--space-4);
 }
 
 .header {
@@ -28,7 +33,7 @@
   width: 32px;
   height: 32px;
   border: 1px solid var(--color-border);
-  border-radius: var(--radius-sm);
+  border-radius: var(--radius-md);
   background-color: var(--color-bg);
   color: var(--color-text-muted);
   padding: 0;
@@ -41,39 +46,33 @@
 }
 
 .suggestion {
-  background-color: var(--color-bg);
+  background-color: var(--color-bg-elevated);
   border: 1px solid var(--color-border);
-  border-radius: var(--radius-sm);
+  border-radius: var(--radius-lg);
   padding: var(--space-2) var(--space-3);
   font-size: 13px;
+  font-weight: 500;
   color: var(--color-text-muted);
-  margin-bottom: var(--space-3);
 }
 
 .suggestionBtn {
   border: none;
   background: transparent;
   color: var(--color-brand);
-  font-weight: 600;
+  font-weight: 700;
   padding: 0 4px;
-}
-
-.section {
-  margin-bottom: var(--space-4);
-}
-
-.section:last-child {
-  margin-bottom: 0;
 }
 
 .sectionTitle {
   font-size: 12px;
+  font-weight: 700;
   color: var(--color-text-muted);
   margin-bottom: var(--space-2);
 }
 
 .sectionText {
   font-size: 15px;
+  font-weight: 500;
   color: var(--color-text);
   line-height: 1.7;
 }
@@ -93,9 +92,10 @@
 .chip {
   background-color: var(--color-bg);
   border: 1px solid var(--color-border);
-  border-radius: var(--radius-sm);
-  padding: 4px 10px;
+  border-radius: var(--radius-md);
+  padding: 6px 12px;
   font-size: 13px;
+  font-weight: 600;
   color: var(--color-text);
 }
 
