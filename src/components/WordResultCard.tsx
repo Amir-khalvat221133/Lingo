@@ -47,8 +47,9 @@ export function WordResultCard({ data, onAcceptSuggestion }: WordResultCardProps
   }
 
   return (
-    <div className={styles.card}>
-      {data.didYouMean && data.didYouMean.confidence >= 0.7 && onAcceptSuggestion && (
+    <>
+      <div className={styles.card}>
+        {data.didYouMean && data.didYouMean.confidence >= 0.7 && onAcceptSuggestion && (
         <div className={styles.suggestion}>
           منظورت{" "}
           <button
@@ -202,7 +203,8 @@ export function WordResultCard({ data, onAcceptSuggestion }: WordResultCardProps
         </div>
       )}
 
+      </div>
       {toast && <div className={styles.toast}>کپی شد</div>}
-    </div>
+    </>
   );
 }
