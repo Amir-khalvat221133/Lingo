@@ -60,8 +60,8 @@ export default function App() {
 
         <main className={styles.results}>
           {state.status === "loading" && <LoadingSkeleton />}
-          {state.status === "noResult" && <NoResult />}
-          {state.status === "error" && <NoResult />}
+          {state.status === "noResult" && <NoResult variant="noResult" />}
+          {state.status === "error" && <NoResult variant="error" onRetry={state.retry} />}
 
           {state.status === "result" && state.singleWord && (
             <WordResultCard data={state.singleWord} onAcceptSuggestion={handleAcceptSuggestion} />

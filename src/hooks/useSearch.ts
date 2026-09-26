@@ -78,5 +78,11 @@ export function useSearch(query: string, override?: "words" | "sentence") {
     }
   }
 
-  return state;
+  function retry() {
+    const trimmed = query.trim();
+    if (!trimmed) return;
+    runSearch(trimmed, override);
+  }
+
+  return { ...state, retry };
 }
