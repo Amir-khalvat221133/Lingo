@@ -14,13 +14,13 @@
   --color-border: #e2e4e8;
   --color-danger: #dc2626;
 
-  --color-glass-bg: rgba(29, 185, 84, 0.08);
+  --color-glass-bg: rgba(255, 255, 255, 0.55);
   --color-glass-border: rgba(255, 255, 255, 0.5);
 
   --radius-sm: 8px;
   --radius-md: 14px;
   --radius-lg: 20px;
-  --radius-xl: 28px;
+  --radius-xl: 36px;
 
   --space-1: 4px;
   --space-2: 8px;
@@ -38,7 +38,7 @@
     --color-text-muted: #9aa0a8;
     --color-border: #2a2a2a;
 
-    --color-glass-bg: rgba(29, 185, 84, 0.1);
+    --color-glass-bg: rgba(255, 255, 255, 0.07);
     --color-glass-border: rgba(255, 255, 255, 0.12);
   }
 }
