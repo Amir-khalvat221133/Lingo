@@ -9,7 +9,7 @@ export function NoResult({ variant = "noResult", onRetry }: NoResultProps) {
   const message =
     variant === "error"
       ? "مشکلی توی دریافت نتیجه پیش اومد."
-      : "دنبال چیزی که نیست میگردی؟";
+      : "  چیزی پیدا نشد!";
 
   return (
     <div className={styles.wrapper}>
