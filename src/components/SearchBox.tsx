@@ -48,6 +48,16 @@ export function SearchBox({
           value={value}
           onChange={(e) => onChange(e.target.value)}
         />
+        {value.length > 0 && (
+          <button
+            type="button"
+            className={styles.clearBtn}
+            onClick={() => onChange("")}
+            aria-label="پاک کردن متن"
+          >
+            ×
+          </button>
+        )}
       </div>
     </div>
   );
