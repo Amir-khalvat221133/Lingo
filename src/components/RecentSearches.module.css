@@ -1,16 +1,8 @@
 .wrapper {
   display: flex;
   flex-direction: column;
-  gap: var(--space-3);
-  padding: var(--space-4);
-  background-color: var(--color-glass-bg);
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
-  border: 1px solid var(--color-glass-border);
-  border-radius: var(--radius-xl);
-  box-shadow:
-    0 12px 32px rgba(0, 0, 0, 0.25),
-    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  gap: var(--space-2);
+  padding: 0;
 }
 
 .header {
@@ -20,7 +12,7 @@
 }
 
 .title {
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 600;
   color: var(--color-text-muted);
 }
@@ -29,7 +21,7 @@
   background: none;
   border: none;
   padding: var(--space-1) var(--space-2);
-  font-size: 13px;
+  font-size: 12px;
   color: var(--color-text-muted);
   cursor: pointer;
 }
@@ -48,8 +40,8 @@
   background: var(--color-bg-elevated);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
-  padding: var(--space-2) var(--space-3);
-  font-size: 14px;
+  padding: 6px 12px;
+  font-size: 13px;
   color: var(--color-text);
   cursor: pointer;
 }
