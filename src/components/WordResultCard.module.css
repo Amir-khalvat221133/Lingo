@@ -16,10 +16,13 @@
 }
 
 .card {
-  background-color: var(--color-bg-elevated);
-  border: 1px solid var(--color-border);
+  background-color: var(--color-glass-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--color-glass-border);
   border-radius: var(--radius-lg);
   padding: var(--space-5);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
   animation: fadeInUp 0.25s ease-out;
 }
 

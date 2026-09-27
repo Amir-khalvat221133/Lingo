@@ -14,6 +14,9 @@
   --color-border: #e2e4e8;
   --color-danger: #dc2626;
 
+  --color-glass-bg: rgba(255, 255, 255, 0.55);
+  --color-glass-border: rgba(255, 255, 255, 0.4);
+
   --radius-sm: 8px;
   --radius-md: 14px;
   --radius-lg: 20px;
@@ -33,6 +36,9 @@
     --color-text: #f2f3f5;
     --color-text-muted: #9aa0a8;
     --color-border: #2a2a2a;
+
+    --color-glass-bg: rgba(255, 255, 255, 0.06);
+    --color-glass-border: rgba(255, 255, 255, 0.1);
   }
 }
 
