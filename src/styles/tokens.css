@@ -30,8 +30,9 @@
   --space-6: 32px;
 }
 
+/* حالت خودکار: از تنظیم سیستم پیروی می‌کنه (مگر کاربر دستی روشن انتخاب کرده باشه) */
 @media (prefers-color-scheme: dark) {
-  :root {
+  :root:not([data-theme="light"]) {
     --color-bg: #0a0a0a;
     --color-bg-elevated: #161616;
     --color-text: #f2f3f5;
@@ -41,6 +42,25 @@
     --color-glass-bg: rgba(255, 255, 255, 0.07);
     --color-glass-border: rgba(255, 255, 255, 0.12);
   }
+}
+
+/* انتخاب دستی: تیره */
+:root[data-theme="dark"] {
+  color-scheme: dark;
+
+  --color-bg: #0a0a0a;
+  --color-bg-elevated: #161616;
+  --color-text: #f2f3f5;
+  --color-text-muted: #9aa0a8;
+  --color-border: #2a2a2a;
+
+  --color-glass-bg: rgba(255, 255, 255, 0.07);
+  --color-glass-border: rgba(255, 255, 255, 0.12);
+}
+
+/* انتخاب دستی: روشن */
+:root[data-theme="light"] {
+  color-scheme: light;
 }
 
 * {
