@@ -14,28 +14,61 @@ import {
   getRecentSearches,
   type RecentSearch,
 } from "./lib/storage";
-import { getStoredTheme, setTheme, type ThemeMode } from "./lib/theme";
+import { getStoredTheme, setTheme } from "./lib/theme";
 import styles from "./App.module.css";
 
-const THEME_ORDER: ThemeMode[] = ["auto", "light", "dark"];
+type ActiveTheme = "light" | "dark";
 
-const THEME_ICON: Record<ThemeMode, string> = {
-  auto: "🖥️",
-  light: "☀️",
-  dark: "🌙",
-};
+function getActiveTheme(): ActiveTheme {
+  const stored = getStoredTheme();
+  if (stored === "light" || stored === "dark") return stored;
+  return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+}
 
-const THEME_LABEL: Record<ThemeMode, string> = {
-  auto: "تم خودکار (مطابق سیستم)",
-  light: "تم روشن",
-  dark: "تم تیره",
-};
+const BRAND_GREEN = "#1db954";
+
+function SunIcon() {
+  return (
+    <svg
+      width="22"
+      height="22"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke={BRAND_GREEN}
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      <circle cx="12" cy="12" r="4" />
+      <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" />
+    </svg>
+  );
+}
+
+function MoonIcon() {
+  return (
+    <svg
+      width="22"
+      height="22"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke={BRAND_GREEN}
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+    </svg>
+  );
+}
 
 export default function App() {
   const [query, setQuery] = useState("");
   const [override, setOverride] = useState<SearchOverride | undefined>(undefined);
   const [recent, setRecent] = useState<RecentSearch[]>(getRecentSearches);
-  const [themeMode, setThemeMode] = useState<ThemeMode>(getStoredTheme);
+  const [activeTheme, setActiveTheme] = useState<ActiveTheme>(getActiveTheme);
 
   const state = useSearch(query, override);
 
@@ -57,10 +90,13 @@ export default function App() {
   }
 
   function handleThemeToggle() {
-    const next = THEME_ORDER[(THEME_ORDER.indexOf(themeMode) + 1) % THEME_ORDER.length];
+    const next: ActiveTheme = activeTheme === "dark" ? "light" : "dark";
     setTheme(next);
-    setThemeMode(next);
+    setActiveTheme(next);
   }
+
+  const themeLabel =
+    activeTheme === "dark" ? "تغییر به تم روشن" : "تغییر به تم تیره";
 
   return (
     <div className={styles.page}>
@@ -77,23 +113,22 @@ export default function App() {
           <button
             type="button"
             onClick={handleThemeToggle}
-            aria-label={`${THEME_LABEL[themeMode]} — برای تغییر بزنید`}
-            title={THEME_LABEL[themeMode]}
+            aria-label={themeLabel}
+            title={themeLabel}
             style={{
               width: 44,
               height: 44,
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              fontSize: 20,
-              lineHeight: 1,
               background: "transparent",
               border: "none",
               borderRadius: "50%",
               cursor: "pointer",
+              padding: 0,
             }}
           >
-            <span aria-hidden="true">{THEME_ICON[themeMode]}</span>
+            {activeTheme === "dark" ? <SunIcon /> : <MoonIcon />}
           </button>
         </header>
 
