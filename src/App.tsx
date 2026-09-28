@@ -14,12 +14,28 @@ import {
   getRecentSearches,
   type RecentSearch,
 } from "./lib/storage";
+import { getStoredTheme, setTheme, type ThemeMode } from "./lib/theme";
 import styles from "./App.module.css";
+
+const THEME_ORDER: ThemeMode[] = ["auto", "light", "dark"];
+
+const THEME_ICON: Record<ThemeMode, string> = {
+  auto: "🖥️",
+  light: "☀️",
+  dark: "🌙",
+};
+
+const THEME_LABEL: Record<ThemeMode, string> = {
+  auto: "تم خودکار (مطابق سیستم)",
+  light: "تم روشن",
+  dark: "تم تیره",
+};
 
 export default function App() {
   const [query, setQuery] = useState("");
   const [override, setOverride] = useState<SearchOverride | undefined>(undefined);
   const [recent, setRecent] = useState<RecentSearch[]>(getRecentSearches);
+  const [themeMode, setThemeMode] = useState<ThemeMode>(getStoredTheme);
 
   const state = useSearch(query, override);
 
@@ -40,11 +56,45 @@ export default function App() {
     setRecent([]);
   }
 
+  function handleThemeToggle() {
+    const next = THEME_ORDER[(THEME_ORDER.indexOf(themeMode) + 1) % THEME_ORDER.length];
+    setTheme(next);
+    setThemeMode(next);
+  }
+
   return (
     <div className={styles.page}>
       <div className={styles.container}>
-        <header className={styles.header}>
+        <header
+          className={styles.header}
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+          }}
+        >
           <span className={styles.logo}>Lingo</span>
+          <button
+            type="button"
+            onClick={handleThemeToggle}
+            aria-label={`${THEME_LABEL[themeMode]} — برای تغییر بزنید`}
+            title={THEME_LABEL[themeMode]}
+            style={{
+              width: 44,
+              height: 44,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              fontSize: 20,
+              lineHeight: 1,
+              background: "transparent",
+              border: "none",
+              borderRadius: "50%",
+              cursor: "pointer",
+            }}
+          >
+            <span aria-hidden="true">{THEME_ICON[themeMode]}</span>
+          </button>
         </header>
 
         <SearchBox
