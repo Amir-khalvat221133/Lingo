@@ -1,14 +1,44 @@
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .card {
-  background-color: var(--color-bg-elevated);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-lg);
+  background-color: var(--color-glass-bg);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid var(--color-glass-border);
+  border-radius: var(--radius-xl);
   padding: var(--space-5);
+  box-shadow:
+    0 12px 32px rgba(0, 0, 0, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  animation: fadeInUp 0.25s ease-out;
 }
 
 .sectionTitle {
-  font-size: 12px;
-  color: var(--color-text-muted);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--color-text);
   margin-bottom: var(--space-2);
+}
+
+.sectionTitle::before {
+  content: "";
+  display: inline-block;
+  width: 3px;
+  height: 14px;
+  background-color: var(--color-brand);
+  border-radius: 2px;
 }
 
 .text {
